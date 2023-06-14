@@ -4,16 +4,16 @@ namespace _Scripts
 {
     public class EnemyAttack : MonoBehaviour
     {
-      [SerializeField]  private Transform target;
+
       
       [SerializeField] private float damage = 40f;
 
-      private PlayerHealth playerHealth;
+      private PlayerHealth target;
       
         void Start()
         {
 
-           playerHealth = FindObjectOfType<PlayerHealth>();
+           target = FindObjectOfType<PlayerHealth>();
         }
 
         public void AttackHitEvent()
@@ -22,11 +22,11 @@ namespace _Scripts
             {
                 return;
             }
-            Debug.Log("Bang bang");
 
-            if (playerHealth != null)
+            if (target != null)
             {
-                playerHealth.DecreaseHealth(damage);
+                target.DecreaseHealth(damage);
+               
             }
            
         }  

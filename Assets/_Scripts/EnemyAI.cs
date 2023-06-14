@@ -8,6 +8,8 @@ namespace _Scripts
 
         [SerializeField] private Transform target;
         [SerializeField] private float chaseRange = 5f;
+        
+        [SerializeField] private float turnSpeed = 5f;
     
 
         private NavMeshAgent _navMeshAgent;
@@ -42,6 +44,7 @@ namespace _Scripts
 
         private void EngageTarget()
         {
+            FaceTarget();
             if (_distanceToTarget > _navMeshAgent.stoppingDistance)
             {
                 
@@ -57,6 +60,7 @@ namespace _Scripts
     
         private void ChaseTarget()
         {
+            
             GetComponent<Animator>().SetBool("attack", false);
             GetComponent<Animator>().SetTrigger("Move");
             _navMeshAgent.SetDestination(target.position);
@@ -66,6 +70,14 @@ namespace _Scripts
         {
            
             Debug.Log("Attacking");
+        }
+
+        private void FaceTarget()
+        {
+            Vector3 direction = (target.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
         }
     
         void OnDrawGizmosSelected()

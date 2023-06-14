@@ -11,10 +11,12 @@ namespace _Scripts
             if (hitPoints < 0)
             {
                 Destroy(gameObject);
+                
             }
             else
             {
                 hitPoints -= damage;
+            
             }
             
         }
