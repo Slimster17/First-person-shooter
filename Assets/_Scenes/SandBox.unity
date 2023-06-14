@@ -3959,6 +3959,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7923544286175771685, guid: 5cb05409c41b877479c87eb82f683110, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1072017128}
     - target: {fileID: 8275122052126148756, guid: 5cb05409c41b877479c87eb82f683110, type: 3}
       propertyPath: target
       value: 
@@ -3966,10 +3970,6 @@ PrefabInstance:
     - target: {fileID: 8275122052126148757, guid: 5cb05409c41b877479c87eb82f683110, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8275122052126148779, guid: 5cb05409c41b877479c87eb82f683110, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8275122052126148783, guid: 5cb05409c41b877479c87eb82f683110, type: 3}
       propertyPath: m_RootOrder

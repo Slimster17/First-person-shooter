@@ -44,22 +44,27 @@ namespace _Scripts
         {
             if (_distanceToTarget > _navMeshAgent.stoppingDistance)
             {
+                
                 ChaseTarget();
             }
 
             if (_distanceToTarget <= _navMeshAgent.stoppingDistance)
             {
+                GetComponent<Animator>().SetBool("attack", true);
                 AttackTarget();
             }
         }
     
         private void ChaseTarget()
         {
+            GetComponent<Animator>().SetBool("attack", false);
+            GetComponent<Animator>().SetTrigger("Move");
             _navMeshAgent.SetDestination(target.position);
         }
 
         private void AttackTarget()
         {
+           
             Debug.Log("Attacking");
         }
     
