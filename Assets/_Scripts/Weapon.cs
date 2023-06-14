@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,12 @@ namespace _Scripts
         
         [SerializeField] private InputAction fire;
 
+        [SerializeField] private int damage = 10;
+
+        [SerializeField] private ParticleSystem muzzleFlash;
+        [SerializeField] private GameObject hitEffect;
+        
+
 
         private void OnEnable()
         {
@@ -20,7 +27,7 @@ namespace _Scripts
 
         void Start()
         {
-        
+          
         }
 
 
@@ -36,13 +43,42 @@ namespace _Scripts
 
         void ProcessFire()
         {
-            if (fire.ReadValue<float>() > 0.5f)
+            if (fire.triggered)
             {
-                RaycastHit hit;
-                Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range);
-                
-                Debug.Log($"{name} hit: {hit.transform.name}");
+                PlayMuzzleFlash();
+                ProcessRayCast();
             }
+        }
+
+        private void PlayMuzzleFlash()
+        {
+            muzzleFlash.Play();
+        }
+
+        private void ProcessRayCast()
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range))
+            {
+                Debug.Log($"{name} hit: {hit.transform.name}");
+                CreateHitImpact(hit);
+                EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
+                if (target != null)
+                {
+                    target.DecreaseHeath(damage);
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void CreateHitImpact(RaycastHit hit)
+        {
+            GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impact,1);
         }
     }
 }
