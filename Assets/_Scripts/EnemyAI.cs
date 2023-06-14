@@ -42,6 +42,11 @@ namespace _Scripts
       
         }
 
+        public void OnDamageTaken()
+        {
+            _isProvoked = true;
+        }
+
         private void EngageTarget()
         {
             FaceTarget();

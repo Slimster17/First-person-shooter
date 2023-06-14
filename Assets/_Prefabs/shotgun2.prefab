@@ -116,7 +116,7 @@ MonoBehaviour:
       m_Action: Fire
       m_Flags: 0
     m_Flags: 0
-  damage: 10
+  damage: 50
   muzzleFlash: {fileID: 6104604382906413129}
   hitEffect: {fileID: 3054855264604173252, guid: 80ed1adf930d90f4eb49abc3fa7cf862, type: 3}
 --- !u!1001 &3341381596313651532

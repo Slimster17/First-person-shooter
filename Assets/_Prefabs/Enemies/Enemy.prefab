@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  chaseRange: 5
+  chaseRange: 15
   turnSpeed: 10
 --- !u!114 &-1620708487386844212
 MonoBehaviour:
@@ -277,7 +277,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8833cdcc8fe7db4439604c639212234d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
