@@ -17,6 +17,9 @@ namespace _Scripts
         [SerializeField] private ParticleSystem muzzleFlash;
         [SerializeField] private GameObject hitEffect;
         
+        [SerializeField] private Ammo ammoSlot;
+        
+        
 
 
         private void OnEnable()
@@ -43,10 +46,15 @@ namespace _Scripts
 
         void ProcessFire()
         {
-            if (fire.triggered)
+            if (fire.triggered && fire.ReadValue<float>() > 0f)
             {
-                PlayMuzzleFlash();
-                ProcessRayCast();
+                if (ammoSlot.AmmoAmmount > 0)
+                {
+                    PlayMuzzleFlash();
+                    ProcessRayCast();
+                    ammoSlot.ReduceCurrentAmmo();
+                }
+                
             }
         }
 
