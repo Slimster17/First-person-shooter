@@ -30,6 +30,7 @@ namespace _Scripts
         private void OnDisable()
         {
             zoom.Disable();
+            ZoomOut();
         }
 
        
@@ -40,18 +41,28 @@ namespace _Scripts
             {
                 if (zoomedInToggle == false)
                 {
-                    zoomedInToggle = true;
-                    fpsCamera.m_Lens.FieldOfView = zoomedInFOV;
-                    fpsController.RotationSpeed = zoomInSensetivity;
-
+                    ZoomIn();
                 }
                 else
                 {
-                    zoomedInToggle = false;
-                    fpsCamera.m_Lens.FieldOfView = zoomedOutFOV;
-                    fpsController.RotationSpeed = zoomOutSensetivity;
+                    ZoomOut();
                 }
             }
+        }
+
+        
+        private void ZoomIn()
+        {
+            zoomedInToggle = true;
+            fpsCamera.m_Lens.FieldOfView = zoomedInFOV;
+            fpsController.RotationSpeed = zoomInSensetivity;
+        }
+        
+        private void ZoomOut()
+        {
+            zoomedInToggle = false;
+            fpsCamera.m_Lens.FieldOfView = zoomedOutFOV;
+            fpsController.RotationSpeed = zoomOutSensetivity;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,7 +28,7 @@ namespace _Scripts
             weaponChoise.performed -= ProcessKeyInput;
         }
 
-        // Start is called before the first frame update
+
         void Start()
         {
             SetWeaponActive();
@@ -49,14 +50,15 @@ namespace _Scripts
                 }
 
                 weaponIndex++;
+                // CheckZoom();
             }
         }
 
-        // Update is called once per frame
+
         void Update()
         {
             int previousWeapon = currentWeapon;
-            // ProcessKeyInput();
+
             ProcessScrollWheel();
 
             if (previousWeapon != currentWeapon)
@@ -107,5 +109,13 @@ namespace _Scripts
                 }
             } 
         }
+
+        // public void CheckZoom()
+        // {
+        //     if (FindObjectOfType<WeaponZoom>() == null)
+        //     { 
+        //         FindObjectOfType<CinemachineVirtualCamera>().m_Lens.FieldOfView = 40f;
+        //     }
+        // }
     }
 }

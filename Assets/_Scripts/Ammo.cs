@@ -25,6 +25,11 @@ namespace _Scripts
          GetAmmoSlot(ammoType).ammoAmount--;
       }
 
+      public void IncreaseCurrentAmmo(AmmoType ammoType, int amount)
+      {
+         GetAmmoSlot(ammoType).ammoAmount += amount;
+      }
+
       private AmmoSlot GetAmmoSlot(AmmoType ammoType)
       {
          foreach (AmmoSlot slot in ammoSlots)
