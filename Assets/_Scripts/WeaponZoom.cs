@@ -9,6 +9,7 @@ namespace _Scripts
     public class WeaponZoom : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera fpsCamera;
+        [SerializeField] private FirstPersonController  fpsController;
         [SerializeField] private float zoomedOutFOV = 40f;
         [SerializeField] private float zoomedInFOV = 20f;
 
@@ -17,7 +18,7 @@ namespace _Scripts
 
         [SerializeField] private InputAction zoom;
         
-        private FirstPersonController  fpsController;
+       
         
         private bool zoomedInToggle = false;
 
@@ -31,11 +32,7 @@ namespace _Scripts
             zoom.Disable();
         }
 
-        private void Start()
-        {
-            fpsController = GetComponent<FirstPersonController>();
-            
-        }
+       
 
         void Update()
         {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,13 +19,17 @@ namespace _Scripts
         [SerializeField] private GameObject hitEffect;
         
         [SerializeField] private Ammo ammoSlot;
-        
+        [SerializeField] private float timeBetweenShot = 0.5f;
+        [SerializeField] private AmmoType ammoType;
+
+        private bool canShoot = true;
         
 
 
         private void OnEnable()
         {
             fire.Enable();
+            canShoot = true;
         }
         
 
@@ -36,26 +41,31 @@ namespace _Scripts
 
         void Update()
         {
-         ProcessFire();
+            if (fire.triggered && fire.ReadValue<float>() > 0f && canShoot == true)
+            {
+                StartCoroutine("ProcessFire");
+            }
+         
         }
-
+        
         private void OnDisable()
         {
             fire.Disable();
         }
-
-        void ProcessFire()
+        
+        IEnumerator ProcessFire()
         {
-            if (fire.triggered && fire.ReadValue<float>() > 0f)
-            {
-                if (ammoSlot.AmmoAmmount > 0)
+            canShoot = false;
+         
+                if (ammoSlot.GetCurrentAmmo(ammoType) > 0)
                 {
                     PlayMuzzleFlash();
                     ProcessRayCast();
-                    ammoSlot.ReduceCurrentAmmo();
+                    ammoSlot.ReduceCurrentAmmo(ammoType);
                 }
                 
-            }
+                yield return new WaitForSeconds(timeBetweenShot);
+            canShoot = true;
         }
 
         private void PlayMuzzleFlash()

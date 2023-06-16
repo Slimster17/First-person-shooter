@@ -1,20 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Ammo : MonoBehaviour
+namespace _Scripts
 {
-   [SerializeField] private int ammoAmmount = 10;
-   
-
-   public int AmmoAmmount
+   public class Ammo : MonoBehaviour
    {
-      get => ammoAmmount;
-      set => ammoAmmount = value;
-   }
 
-   public void ReduceCurrentAmmo()
-   {
-      ammoAmmount--;
+      [SerializeField] private AmmoSlot[] ammoSlots;
+      [System.Serializable]
+      private class AmmoSlot
+      {
+         public AmmoType ammoType;
+         public int ammoAmount;
+      
+      }
+
+      public int GetCurrentAmmo(AmmoType ammoType)
+      {
+        
+         return GetAmmoSlot(ammoType).ammoAmount;
+      }
+      
+      public void ReduceCurrentAmmo(AmmoType ammoType)
+      {
+         GetAmmoSlot(ammoType).ammoAmount--;
+      }
+
+      private AmmoSlot GetAmmoSlot(AmmoType ammoType)
+      {
+         foreach (AmmoSlot slot in ammoSlots)
+         {
+            if (slot.ammoType == ammoType)
+            {
+               return slot;
+            }
+         }
+         return null;
+      }
    }
 }
