@@ -17,16 +17,26 @@ namespace _Scripts
         private float _distanceToTarget = Mathf.Infinity;
 
         private bool _isProvoked = false;
-    
+
+        private EnemyHealth health;
+        private CapsuleCollider capsuleCollider;
 
         void Start()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            health = GetComponent<EnemyHealth>();
+            capsuleCollider = GetComponent<CapsuleCollider>();
         }
 
 
         void Update()
         {
+            if (health.IsDead())
+            {
+                this.enabled = false;
+                _navMeshAgent.enabled = false;
+                capsuleCollider.enabled = false;
+            }
             _distanceToTarget = Vector3.Distance(target.position, transform.position);
 
             if (_isProvoked)
