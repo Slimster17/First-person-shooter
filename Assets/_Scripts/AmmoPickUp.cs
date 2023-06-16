@@ -12,7 +12,7 @@ namespace _Scripts
             if (other.gameObject.tag == "Player")
             {
                 FindObjectOfType<Ammo>().IncreaseCurrentAmmo(ammoType,ammoAmount);
-                Debug.Log("Triggered");
+                Destroy(gameObject);
             }
            
         }
