@@ -6,7 +6,7 @@ namespace _Scripts
     public class EnemyAI : MonoBehaviour
     {
 
-        [SerializeField] private Transform target;
+      
         [SerializeField] private float chaseRange = 5f;
         
         [SerializeField] private float turnSpeed = 5f;
@@ -17,7 +17,9 @@ namespace _Scripts
         private float _distanceToTarget = Mathf.Infinity;
 
         private bool _isProvoked = false;
-
+        
+        Transform target;
+        
         private EnemyHealth health;
         private CapsuleCollider capsuleCollider;
 
@@ -26,6 +28,7 @@ namespace _Scripts
             _navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<EnemyHealth>();
             capsuleCollider = GetComponent<CapsuleCollider>();
+            target = FindObjectOfType<PlayerHealth>().transform;
         }
 
 
@@ -75,10 +78,13 @@ namespace _Scripts
     
         private void ChaseTarget()
         {
-            
-            GetComponent<Animator>().SetBool("attack", false);
-            GetComponent<Animator>().SetTrigger("Move");
-            _navMeshAgent.SetDestination(target.position);
+            if (enabled)
+            {
+                GetComponent<Animator>().SetBool("attack", false);
+                GetComponent<Animator>().SetTrigger("Move");
+                _navMeshAgent.SetDestination(target.position);
+            }
+           
         }
 
         private void AttackTarget()

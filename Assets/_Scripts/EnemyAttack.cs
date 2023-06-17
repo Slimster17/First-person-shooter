@@ -26,6 +26,7 @@ namespace _Scripts
             if (target != null)
             {
                 target.DecreaseHealth(damage);
+                target.GetComponent<DisplayDamage>().ShowDamageImpact();
                
             }
            

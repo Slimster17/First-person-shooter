@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,8 @@ namespace _Scripts
         [SerializeField] private float timeBetweenShot = 0.5f;
         [SerializeField] private AmmoType ammoType;
 
+        [SerializeField] private TextMeshProUGUI ammotext;
+
         private bool canShoot = true;
         
 
@@ -41,13 +44,20 @@ namespace _Scripts
 
         void Update()
         {
+            DisplayAmmo();
             if (fire.triggered && fire.ReadValue<float>() > 0f && canShoot == true)
             {
                 StartCoroutine("ProcessFire");
             }
          
         }
-        
+
+        private void DisplayAmmo()
+        {
+            int currentAmmo = ammoSlot.GetCurrentAmmo(ammoType);
+            ammotext.text = currentAmmo.ToString();
+        }
+
         private void OnDisable()
         {
             fire.Disable();
