@@ -10,6 +10,8 @@ namespace _Scripts
         [SerializeField] private float chaseRange = 5f;
         
         [SerializeField] private float turnSpeed = 5f;
+
+        [SerializeField] private AudioClip chaseSound;
     
 
         private NavMeshAgent _navMeshAgent;
@@ -23,8 +25,12 @@ namespace _Scripts
         private EnemyHealth health;
         private CapsuleCollider capsuleCollider;
 
+        private AudioSource audioSource;
+
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.clip = chaseSound;
             _navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<EnemyHealth>();
             capsuleCollider = GetComponent<CapsuleCollider>();
@@ -65,7 +71,7 @@ namespace _Scripts
             FaceTarget();
             if (_distanceToTarget > _navMeshAgent.stoppingDistance)
             {
-                
+                audioSource.Play();
                 ChaseTarget();
             }
 
@@ -80,6 +86,7 @@ namespace _Scripts
         {
             if (enabled)
             {
+              
                 GetComponent<Animator>().SetBool("attack", false);
                 GetComponent<Animator>().SetTrigger("Move");
                 _navMeshAgent.SetDestination(target.position);

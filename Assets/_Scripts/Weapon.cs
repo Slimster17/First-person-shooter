@@ -25,6 +25,9 @@ namespace _Scripts
 
         [SerializeField] private TextMeshProUGUI ammotext;
 
+        [SerializeField] private AudioClip ammoSound;
+        private AudioSource audioSource;
+
         private bool canShoot = true;
         
 
@@ -38,7 +41,8 @@ namespace _Scripts
 
         void Start()
         {
-          
+            audioSource = GetComponent<AudioSource>();
+            audioSource.clip = ammoSound;
         }
 
 
@@ -69,6 +73,7 @@ namespace _Scripts
          
                 if (ammoSlot.GetCurrentAmmo(ammoType) > 0)
                 {
+                    audioSource.Play();
                     PlayMuzzleFlash();
                     ProcessRayCast();
                     ammoSlot.ReduceCurrentAmmo(ammoType);
